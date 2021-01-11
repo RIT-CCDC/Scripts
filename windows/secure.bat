@@ -1,5 +1,5 @@
-#Run this script in an elevated CMD prompt
-#This does not include firewall rules
+# Run this script in an elevated CMD prompt
+# This does not include firewall rules
 
 # Backup admin account
 net user admin2

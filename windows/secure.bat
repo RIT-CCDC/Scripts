@@ -1,6 +1,7 @@
 REM  Run this script in an elevated CMD prompt
 REM  This does not include firewall rules
-
+REM Comment out any sections that do not apply to a certain service (ex. SMB scored box)
+@echo off
 
 REM rename + disable administrator account
 wmic useraccount where "name='Administrator'" rename Admin

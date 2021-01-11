@@ -22,12 +22,14 @@ netsh adv f a r n=Loop-In dir=in act=allow remoteip=127.0.0.1
 netsh adv f a r n=Ping-Out dir=out act=allow prof=any prot=icmpv4:8,any
 netsh adv f a r n=Ping-In dir=in act=allow prof=any prot=icmpv4:8,any
 
+:: dynamic port range limiting
+netsh interface ipv4 set dynamicportrange tcp 10000 1000 persistent
+
 :: server rules, change the protocol and port number
 netsh adv f a r n=add-comment-here dir=in act=allow prof=any prot=udp localport=67
 
 :: client rules, change protocol and port number
 netsh adv f a r n=add-comment-here dir=out act=allow prof=any prot=udp remoteport=68
-
 
 :: Lockout prevention - put this at the end if you're logged in remotely
 timeout 5

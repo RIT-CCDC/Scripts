@@ -1,31 +1,15 @@
 #!/bin/bash
-
-indent() { sed 's/^/\t/g'; }
-
 # OS
-echo "[+] OS:"
-cat /etc/os-release | indent
-
+echo -e "[OS]\n`cat /etc/os-release`\n"
 # Hostname
-echo "[+] Hostname:"
-hostname | indent
-
+echo -e "[Hostname]\n`hostname`\n"
 # Admin Users
-echo "[+] Admins:"
-for i in adm sudo wheel; do getent group $i | indent; done
-
+echo -e "[Admins]\n`for g in adm sudo wheel; do getent group $g; done`\n"
 # Users
-echo "[+] Users:"
-getent passwd | cut -d':' -f1,7| indent
-
+echo -e "[Users]\n`getent passwd | cut -d':' -f1,7`\n"
 # IP Address/MACs
-echo "[+] IP/MAC:"
-ip -br -c a  | indent || ip a | indent
-
+echo -e "[IP/MAC]\n`ip -br -c a || ip a`\n"
 # Routes
-echo "[+] Routes:"
-ip r | indent
-
+echo -e "[Routes]\n`ip r`\n"
 # Services/Ports
-echo "[+] Services:"
-ss -tulpan | indent
+echo -e "[Services]\n`ss -tulpan`\n"

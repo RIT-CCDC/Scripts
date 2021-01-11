@@ -15,8 +15,8 @@ net user Admin /active:no
 auditpol /set /category:* /success:enable /failure:enable
 
 
-#backup + delete scheduled tasks
-#TODO
+# delete scheduled tasks
+schtasks /delete /tn *
 
 
 #Disable RDP
@@ -98,22 +98,9 @@ reg ADD HKLM\SYSTEM\CurrentControlSet\Control\SecurePipeServers\winreg\AllowedEx
 reg ADD HKLM\SYSTEM\CurrentControlSet\Control\SecurePipeServers\winreg\AllowedPaths /v Machine /t REG_MULTI_SZ /d "" /f
 
 
-#stop winrm service
-net stop winrm
-
-
-#restart SMB server for changes
-net stop server
-net start server
-
-
 # Enable LSASS Memory Protection
 reg add "HKLM\SYSTEM\CurrentControlSet\Control\Lsa" /v RunAsPPL /t REG_DWORD /d 1 /f
 
 
 # Turn off Test Mode (in case they set the flag)
 bcdedit /set testsigning off
-
-
-#full restart
-#restart /r /t 0

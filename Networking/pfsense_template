@@ -1,0 +1,18 @@
+#template script for pfSense firewall rules 
+#written on 1/12/2021 for the NECCDC Qualifer Compeition
+
+#blocking
+#easyrule block <interface> <source ip>
+
+easyrule block wan 8.8.8.8
+
+#passing
+#easyrule pass  <interface> <protocol> <source IP> <destination ip> [destination port]
+easyrule pass wan tcp 1.2.3.4 192.168.0.4 80
+
+
+#lan rules 
+
+
+
+#cloud rules 

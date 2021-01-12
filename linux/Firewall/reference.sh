@@ -30,7 +30,6 @@ echo "> Applying Default Accept"
 iptables -P INPUT ACCEPT
 iptables -P OUTPUT ACCEPT
 
-
 # Allow ICMP 
 echo "> Allow ICMP"
 iptables -A INPUT -p ICMP -j ACCEPT
@@ -62,10 +61,20 @@ iptables -A OUTPUT -p tcp --sport ssh -m state --state ESTABLISHED -j ACCEPT
 # iptables -A OUTPUT -p tcp --dport 80 -m state --state NEW,ESTABLISHED -j ACCEPT
 # iptables -A INPUT -p tcp --sport 80 -m state --state ESTABLISHED -j ACCEPT
 
-# # Allow DNS Outgoing (UDP Only)
+# # Allow HTTP Incoming
+# echo "> Allow Inbound HTTP"
+# iptables -A INPUT -p tcp --dport 80 -m state --state NEW,ESTABLISHED -j ACCEPT
+# iptables -A OUTPUT -p tcp --sport 80 -m state --state ESTABLISHED -j ACCEPT
+
+# # Allow DNS Outgoing (UDP)
 # echo "> Allow Outbound DNS (UDP)"
 # iptables -A OUTPUT -p udp --dport 53 -m state --state NEW,ESTABLISHED -j ACCEPT
 # iptables -A INPUT  -p udp --sport 53 -m state --state ESTABLISHED -j ACCEPT
+
+# # Allow DNS Incoming (UDP)
+# echo "> Allow Inbound DNS (UDP)"
+# iptables -A INPUT -p udp --dport 53 -m state --state NEW,ESTABLISHED -j ACCEPT
+# iptables -A OUTPUT -p udp --sport 53 -m state --state ESTABLISHED -j ACCEPT
 
 # # Allow SSH Outgoing
 # echo "> Allow Outbound SSH"

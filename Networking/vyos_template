@@ -1,0 +1,44 @@
+#template script for vyos firewall rules 
+#written on 1/12/2021 for the NECCDC Qualifer Compeition
+
+
+#IN rules
+#Set firewall name <box name>_IN rule <rule #> destination port <list of ports>
+#Set firewall name <box name>_IN rule <rule #> destination address <x.x.x.x>
+#Set firewall name <box name>_IN rule <rule #> action accept
+#Set firewall name <box name>_IN rule <rule #> protocol <tcp, udp, tcp_udp>
+#Set firewall name <box name>_IN default-action drop
+#Set interfaces ethernet <outer interface> firewall in name <box name>_IN
+
+
+#Set firewall name router_IN rule 1 destination port [22, 80, 445]
+#Set firewall name router_IN rule 1 destination address 192.10.1.1
+#Set firewall name router_IN rule 1 action accept
+#Set firewall name router_IN rule 1 protocol tcp_udp
+#Set firewall name router_IN default-action drop
+#Set interfaces ethernet eth01 firewall in name router_IN
+
+
+#Out rules
+#Set firewall name <box name>_OUT rule <rule #> source port <list of ports>
+#Set firewall name <box name>_OUT rule <rule #> source address <x.x.x.x>
+#Set firewall name <box name>_OUT rule <rule #> action accept
+#Set firewall name <box name>_OUT rule <rule #> protocol <tcp, udp, tcp_udp>
+#Set firewall name <box name>_OUT default-action drop
+#Set interfaces ethernet <outer interface> firewall in name <box name>_OUT
+
+#Set firewall name router_OUT rule 1 source port [22, 80, 445]
+#Set firewall name router_OUT rule 1 source address 192.10.1.1
+#Set firewall name router_OUT rule 1 action accept
+#Set firewall name router_OUT rule 1 protocol tcp_udp
+#Set firewall name router_OUT default-action drop
+#Set interfaces ethernet eth01 firewall in name router_OUT
+
+
+
+
+#LAN rules
+
+
+
+#Cloud Rules

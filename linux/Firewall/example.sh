@@ -1,10 +1,24 @@
-#!/bin/sh
+#!/bin/bash
 
 ## May Have to mess around with firewalld ## 
     # sudo systemctl stop firewalld
     # sudo sysytemctl disable firewalld
 
 # If this Script is not Working check .bashrc or aliases
+
+###########################
+## Must run as superuser ##
+###########################
+
+if [ "$EUID" -ne 0 ]
+  then echo "Must run as superuser"
+  exit
+fi
+
+
+################
+## Main Rules ##
+################
 
 # Flush Tables 
 echo "> Flushing Tables"
@@ -32,6 +46,7 @@ echo "> Allow Inbound SSH"
 iptables -A INPUT -p tcp --dport ssh -m state --state NEW,ESTABLISHED -j ACCEPT
 iptables -A OUTPUT -p tcp --sport ssh -m state --state ESTABLISHED -j ACCEPT
 
+
 ########################
 # OTHER OPTIONAL RULES #
 ########################
@@ -58,15 +73,18 @@ iptables -A OUTPUT -p tcp --sport ssh -m state --state ESTABLISHED -j ACCEPT
 # iptables -A INPUT -p tcp --sport 22 -m state --state ESTABLISHED -j ACCEPT
 
 # # Accept Various Port Incoming
-# echo "> Allow Outbound HTTP"
-# iptables -A INPUT -p tcp --dport 3000 -m state --state NEW,ESTABLISHED -j ACCEPT
-# iptables -A OUTPUT -p tcp --sport 3000 -m state --state ESTABLISHED -j ACCEPT
+# echo "> Allow Inbound Mayan MDMS"
+# iptables -A INPUT -p tcp --dport 8000 -m state --state NEW,ESTABLISHED -j ACCEPT
+# iptables -A OUTPUT -p tcp --sport 8000 -m state --state ESTABLISHED -j ACCEPT
 
 # # Allow Various Port Outgoing
 # iptables -A OUTPUT -p udp --dport 3000 -m state --state NEW,ESTABLISHED -j ACCEPT
 # iptables -A INPUT  -p udp --sport 3000 -m state --state ESTABLISHED -j ACCEPT
 
 
+##################
+## Ending Rules ##
+##################
 
 # Drop All Traffic If Not Matching
 echo "> Drop non-matching traffic : Connection may drop"
